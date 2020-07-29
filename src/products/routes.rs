@@ -39,11 +39,7 @@ pub async fn list(db: State<'_, DynamoDbClient>) -> Result<Json<Vec<Product>>> {
     })
     .await
     .map_err(|e| Error::InternalError(e.to_string()))
-    .and_then(|result| {
-        result
-            .items
-            .ok_or(Error::NotFoundError("not found".to_string()))
-    })
+    .map(|result| result.items.unwrap_or(Vec::new()))
     .and_then(|items| {
         items
             .iter()
