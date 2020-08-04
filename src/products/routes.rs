@@ -33,23 +33,23 @@ pub async fn create(
 // GET /products
 #[get("/")]
 pub async fn list(db: State<'_, DynamoDbClient>) -> Result<Json<Vec<Product>>> {
-    db.scan(ScanInput {
-        table_name: String::from(super::table_name()),
-        ..ScanInput::default()
-    })
-    .await
-    .map_err(|e| Error::InternalError(e.to_string()))
-    .map(|result| result.items.unwrap_or(Vec::new()))
-    .and_then(|items| {
-        items
-            .iter()
-            .map(|item| {
-                Product::from_attrs(item.clone())
-                    .map_err(|_| Error::InternalError("invalid record".to_string()))
-            })
-            .collect::<Result<Vec<Product>>>()
-            .and_then(|products| Ok(Json(products)))
-    })
+    let products: Vec<Product> = db
+        .scan(ScanInput {
+            table_name: String::from(super::table_name()),
+            ..ScanInput::default()
+        })
+        .await
+        .map_err(|e| Error::InternalError(e.to_string()))
+        .map(|output| {
+            output
+                .items
+                .unwrap_or_default()
+                .into_iter()
+                .flat_map(|item| Product::from_attrs(item.clone()))
+                .collect()
+        })?;
+
+    Ok(Json(products))
 }
 
 // DELETE: This handler is responsible for deleting a single product
