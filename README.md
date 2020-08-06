@@ -20,6 +20,12 @@ $ git clone https://github.com/PaulMaddox/rust-rest-dynamodb.git
 $ cd rust-rest-dynamodb
 ```
 
+You will need to make sure that:
+
+ - You have valid AWS credentials (either env variables, IAM role or ~/.aws/credentials file)
+ - You create a DynamoDB table in advance, called `products`. It only needs a single field defined (the partition key) called `id`, of type String.
+ - The region in main.rs matches the region you have the DynamoDB table deployed to
+
 ... and finally run the project with cargo
 
 ```
