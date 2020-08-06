@@ -9,3 +9,19 @@ It uses [Rusoto](https://github.com/rusoto/rusoto) and [Dynomite](https://github
 Note: This repository currently uses the `master` branch of Rocket, due to support for async/tokio.
 
 
+## Running this example
+
+First install the Rust toolchain, by following the instructions at: https://rustup.rs/
+
+Then clone the repo:
+
+```
+$ git clone https://github.com/PaulMaddox/rust-rest-dynamodb.git
+$ cd rust-rest-dynamodb
+```
+
+... and finally run the project with cargo
+
+```
+$ cargo run 
+```
