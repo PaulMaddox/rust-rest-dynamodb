@@ -6,8 +6,14 @@ This project uses the [rocket.rs](rocket.rs) web framework to define an API for 
 
 It uses [Rusoto](https://github.com/rusoto/rusoto) and [Dynomite](https://github.com/softprops/dynomite) for accessing Amazon DynamoDB.
 
-Note: This repository currently uses the `master` branch of Rocket, due to support for async/tokio.
+This repository currently uses the `master` branch of Rocket, due to support for async/tokio.
 
+
+## Alternative: Deploy using AWS Lambda
+
+If you're interested in what this would look like with Serverless and AWS Lambda (instead of Rocket), then check out this cool repo that my collegue [Nicolas Moutschen](https://twitter.com/NMoutschen) put together:
+
+https://github.com/nmoutschen/rust-rest-serverless
 
 ## Running this example
 
